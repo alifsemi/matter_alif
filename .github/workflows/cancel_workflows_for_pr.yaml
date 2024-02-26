@@ -15,8 +15,6 @@
 name: Cancel workflows on failing CI
 on:
     workflow_dispatch:
-    schedule:
-        - cron: "*/10 * * * *"
 
 jobs:
     cancel_workflow:

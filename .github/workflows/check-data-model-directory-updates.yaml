@@ -15,8 +15,7 @@
 name: Data model directory checks
 
 on:
-  pull_request:
-
+  workflow_dispatch:
 jobs:
   check-data_model-updates:
     name: Check for updates to data model directory without SHA updates
