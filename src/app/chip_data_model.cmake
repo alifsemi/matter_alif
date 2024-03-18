@@ -16,6 +16,10 @@
 
 set(CHIP_APP_BASE_DIR ${CMAKE_CURRENT_LIST_DIR})
 
+if (NOT CHIP_ROOT)
+    get_filename_component(CHIP_ROOT ${CHIP_APP_BASE_DIR}/../.. REALPATH)
+endif()
+
 if (NOT CHIP_APP_ZAP_DIR)
     get_filename_component(CHIP_APP_ZAP_DIR ${CHIP_ROOT}/zzz_generated/app-common REALPATH)
 endif()
