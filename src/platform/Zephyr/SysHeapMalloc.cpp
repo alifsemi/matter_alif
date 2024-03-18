@@ -99,7 +99,7 @@ void * Calloc(size_t num, size_t size)
         return nullptr;
     }
 
-    void * mem = malloc(totalSize);
+    void * mem = Malloc(totalSize);
 
     if (mem)
     {
@@ -161,22 +161,22 @@ void * WRAP(calloc)(size_t num, size_t size) __attribute((alias("_ZN4chip11Devic
 void * WRAP(realloc)(void * mem, size_t size) __attribute((alias("_ZN4chip11DeviceLayer6Malloc7ReallocEPvj")));
 void WRAP(free)(void * mem) __attribute((alias("_ZN4chip11DeviceLayer6Malloc4FreeEPv")));
 
-void * WRAP(_malloc_r)(_reent *, size_t size)
+void * WRAP(_malloc_r)(void *, size_t size)
 {
     return WRAP(malloc)(size);
 }
 
-void * WRAP(_calloc_r)(_reent *, size_t num, size_t size)
+void * WRAP(_calloc_r)(void *, size_t num, size_t size)
 {
     return WRAP(calloc)(num, size);
 }
 
-void * WRAP(_realloc_r)(_reent *, void * mem, size_t size)
+void * WRAP(_realloc_r)(void *, void * mem, size_t size)
 {
     return WRAP(realloc)(mem, size);
 }
 
-void WRAP(_free_r)(_reent *, void * mem)
+void WRAP(_free_r)(void *, void * mem)
 {
     WRAP(free)(mem);
 }

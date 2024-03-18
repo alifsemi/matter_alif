@@ -1,0 +1,11 @@
+#
+# Copyright (c) 2024 Alif Semiconductor - All Rights Reserved.
+#
+
+name: connectedhomeip
+
+build:
+    cmake: config/alif/chip-module
+    kconfig: config/alif/chip-module/Kconfig
+    depends:
+    - openthread
