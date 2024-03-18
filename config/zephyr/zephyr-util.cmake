@@ -34,7 +34,8 @@ function(zephyr_get_compile_flags VAR LANG)
     zephyr_get_system_include_directories_for_lang_as_string(${LANG} SYSTEM_INCLUDES)
     zephyr_get_compile_definitions_for_lang_as_string(${LANG} DEFINES)
     zephyr_get_compile_options_for_lang_as_string(${LANG} FLAGS)
-    set(${VAR} ${INCLUDES} ${SYSTEM_INCLUDES} ${DEFINES} ${FLAGS} ${${VAR}} PARENT_SCOPE)
+    string(CONCAT x ${INCLUDES} " " ${SYSTEM_INCLUDES} " " ${DEFINES} " " ${FLAGS} )
+    set(${VAR} ${x} ${${VAR}} PARENT_SCOPE)
 endfunction()
 
 #
