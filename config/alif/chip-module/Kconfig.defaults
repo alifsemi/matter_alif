@@ -1,0 +1,331 @@
+#
+#   Copyright (c) 2024 Project CHIP Authors
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+#
+
+# The purpose of this file is to define new default values of settings used when building Matter samples.
+# This file only changes defaults and thus all symbols here must be promptless
+# and safeguarded so that they only are applied when building Matter.
+
+if CHIP
+
+config LOG
+    default y
+
+if LOG
+
+choice LOG_MODE
+    default LOG_MODE_MINIMAL
+endchoice
+
+choice MATTER_LOG_LEVEL_CHOICE
+	default MATTER_LOG_LEVEL_DBG
+endchoice
+
+config CHIP_APP_LOG_LEVEL
+    default 4 # debug
+
+config LOG_DEFAULT_LEVEL
+    default 1 # error
+
+config CHIP_LOG_SIZE_OPTIMIZATION
+    default y
+
+endif
+
+# Enable device ID rotation
+config CHIP_ROTATING_DEVICE_ID
+    default y
+
+config PRINTK_SYNC
+    default y
+
+config ASSERT
+    default y
+
+config ASSERT_NO_COND_INFO
+    default y
+
+config ASSERT_NO_MSG_INFO
+    default y
+
+config HW_STACK_PROTECTION
+    default y
+
+config FPU
+    default y
+
+config SHELL
+    default y
+
+config SHELL_MINIMAL
+    default y
+
+# Enable getting reboot reasons information
+config HWINFO
+	bool
+	default y
+
+config HWINFO_SHELL
+	bool
+	default n
+
+config PTHREAD_IPC
+    bool
+    default n
+
+config POSIX_MAX_FDS
+    int
+    default 16
+
+# Application stack size
+config MAIN_STACK_SIZE
+    default 6144
+
+config INIT_STACKS
+    default y
+
+config NET_IPV6_MLD
+    default y
+
+config NET_IF_MCAST_IPV6_ADDR_COUNT
+    default 14
+
+# Network buffers
+config NET_PKT_RX_COUNT
+    default 8
+
+config NET_PKT_TX_COUNT
+    default 8
+
+config NET_BUF_RX_COUNT
+    default 16
+
+config NET_BUF_TX_COUNT
+    default 16
+
+# Bluetooth Low Energy configs
+
+config BT
+    default y
+
+config BT_PERIPHERAL
+    default y
+
+config BT_PERIPHERAL_PREF_MIN_INT
+    default 36
+
+config BT_PERIPHERAL_PREF_MAX_INT
+    default 36
+
+# Increase BT timeout to 5 s to improve connection reliability and avoid fast drop outs.
+config BT_PERIPHERAL_PREF_TIMEOUT
+    default 500
+
+config BT_GAP_AUTO_UPDATE_CONN_PARAMS
+    default y
+
+# Decrease connection parameters update time, as some Matter controllers request
+# enabling IP networking faster than BT connection parameters are updated, what may result
+# in commissioning instabilities.
+config BT_CONN_PARAM_UPDATE_TIMEOUT
+    default 1000
+
+config BT_GATT_DYNAMIC_DB
+    default y
+
+config BT_DEVICE_NAME_DYNAMIC
+    default y
+
+config BT_DEVICE_NAME_MAX
+    default 15
+
+config BT_MAX_CONN
+    default 1
+
+config BT_L2CAP_TX_MTU
+    default 247
+
+config BT_BUF_ACL_RX_SIZE
+    default 251
+
+config BT_BUF_ACL_TX_SIZE
+    default 251
+
+config BT_RX_STACK_SIZE
+    default 1200
+
+config BT_CTLR_ECDH
+    bool
+    default n
+
+config BT_CTLR_LE_ENC
+    bool
+    default n
+
+config BT_DEVICE_NAME_GATT_WRITABLE
+    bool
+    default n
+
+config BT_GATT_CACHING
+    bool
+    default n
+
+# Disable 2M PHY due to interoperability issues.
+config BT_CTLR_PHY_2M
+    default n
+# Disable OTA because we not supported yet
+config CHIP_OTA_REQUESTOR
+    default n
+
+# Enable extended discovery
+config CHIP_EXTENDED_DISCOVERY
+    default n
+
+config NVS_LOOKUP_CACHE_SIZE
+    default 512
+
+# Enable OpenThread
+config NET_L2_OPENTHREAD
+    default y
+
+# Enable mbedTLS
+config MBEDTLS_ENABLE_HEAP
+	bool
+	default y
+
+# Disable PSA usage
+config MBEDTLS_USE_PSA_CRYPTO
+    bool "MBEDTLS_USE_PSA_CRYPTO"
+    default n
+
+config MBEDTLS_PSA_STATIC_KEY_SLOTS
+    bool "MBEDTLS_PSA_STATIC_KEY_SLOTS"
+    default n
+
+config MBEDTLS_PSA_CRYPTO_C
+    bool "MBEDTLS_PSA_CRYPTO_C"
+    default n
+
+config CHIP_CRYPTO_PSA
+    bool "CHIP_CRYPTO_PSA"
+    default n
+
+config MBEDTLS_PSA_KEY_SLOT_COUNT
+    default 64
+
+# mbedTLS tweaks
+config MBEDTLS_USER_CONFIG_ENABLE
+    default y
+
+config MBEDTLS_USER_CONFIG_FILE
+    default "zephyr-mbedtls-config.h"
+config MBEDTLS_ENTROPY_C
+	default y
+
+config MBEDTLS_ENTROPY_POLL_ZEPHYR
+	default y
+
+config MBEDTLS_ENABLE_HEAP
+	default y
+
+config MBEDTLS_HEAP_SIZE
+	default 15360
+
+config MBEDTLS_CIPHER_AES_ENABLED
+	default y
+
+config MBEDTLS_CIPHER_CCM_ENABLED
+	default y
+
+config MBEDTLS_CTR_DRBG_ENABLED
+	default y
+
+config MBEDTLS_CIPHER_MODE_CBC_ENABLED
+	default y
+
+config MBEDTLS_ECP_C
+	default y
+
+config MBEDTLS_ECP_DP_SECP256R1_ENABLED
+	default y
+
+# Disable OpenThread shell
+config OPENTHREAD_SHELL
+    default n
+
+# Disable certain parts of Zephyr IPv6 stack
+config NET_IPV6_NBR_CACHE
+    bool
+    default n
+
+config OPENTHREAD_THREAD_STACK_SIZE
+	default 4096
+
+config CHIP_MALLOC_SYS_HEAP_SIZE
+    default 8192 if NET_L2_OPENTHREAD
+
+config OPENTHREAD_RADIO_WORKQUEUE_STACK_SIZE
+    default 1024
+
+if NET_L2_OPENTHREAD
+# Enable basic features for matter
+
+config OPENTHREAD_DUA
+    default y
+
+config OPENTHREAD_SLAAC
+    default y
+
+config OPENTHREAD_DHCP6_CLIENT
+    default y
+
+config OPENTHREAD_SRP_CLIENT
+    default y
+endif
+
+
+# Disable not used shell modules
+
+config SHELL_WILDCARD
+    default n
+
+config SHELL_VT100_COLORS
+    default n
+
+config SHELL_STATS
+    default n
+
+config KERNEL_SHELL
+    default n
+
+config SENSOR_SHELL
+    default n
+
+config DEVICE_SHELL
+    default n
+
+config DATE_SHELL
+    default n
+
+config DEVMEM_SHELL
+    default n
+
+config MCUBOOT_SHELL
+    default n
+
+config FLASH_SHELL
+    default n
+
+endif
