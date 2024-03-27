@@ -1,0 +1,7 @@
+chip_device_platform = "alif"
+
+# Default arguments to build
+declare_args() {
+  chip_malloc_sys_heap = false
+  chip_enable_factory_data = false
+}
