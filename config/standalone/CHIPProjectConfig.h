@@ -88,4 +88,14 @@
 // Safe to enable this flag since standalone is associated with host and not a device.
 #define CONFIG_BUILD_FOR_HOST_UNIT_TEST 1
 
+#define CHIP_CONFIG_MRP_LOCAL_ACTIVE_RETRY_INTERVAL (15000_ms32)
+
+#define CHIP_CONFIG_MRP_LOCAL_IDLE_RETRY_INTERVAL (15000_ms32)
+
+#define CHIP_CONFIG_RMP_DEFAULT_ACK_TIMEOUT (20000_ms32)
+
+#define BTP_CONN_RSP_TIMEOUT_MS 315000 // 315 seconds
+
+#define BTP_ACK_TIMEOUT_MS 315000 // 315 seconds
+
 #endif /* CHIPPROJECTCONFIG_H */
