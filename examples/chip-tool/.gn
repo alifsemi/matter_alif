@@ -21,5 +21,7 @@ buildconfig = "${build_root}/config/BUILDCONFIG.gn"
 check_system_includes = true
 
 default_args = {
+  # Disable wifi for guarantee proper IPv6 routing
+  chip_enable_wifi = false
   import("//args.gni")
 }
