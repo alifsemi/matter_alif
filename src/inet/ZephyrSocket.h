@@ -31,6 +31,8 @@
 #include <zephyr/net/socket.h>
 #endif
 
+#if 0
+/* Remove recvmsg() re-define  */
 static inline ssize_t recvmsg(int sock, struct msghdr * msg, int flags)
 {
     // Zephyr doesn't implement recvmsg at all, but if the message vector size is > 0 we can simply
@@ -51,3 +53,4 @@ static inline ssize_t recvmsg(int sock, struct msghdr * msg, int flags)
 
     return ret;
 }
+#endif
