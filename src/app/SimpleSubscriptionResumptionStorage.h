@@ -79,6 +79,16 @@ protected:
         return 2 *
             TLV::EstimateStructOverhead(
                    TLV::EstimateStructOverhead(sizeof(uint8_t), sizeof(EndpointId), sizeof(ClusterId), sizeof(AttributeId)) *
+                   CHIP_IM_SERVER_MAX_NUM_PATH_GROUPS_FOR_SUBSCRIPTION);
+    }
+
+    static constexpr size_t MaxSubscriptionsPathsSize()
+    {
+        // IM engine declares an attribute path pool and an event path pool, and each pool
+        // includes CHIP_IM_SERVER_MAX_NUM_PATH_GROUPS_FOR_SUBSCRIPTIONS for subscriptions
+        return 2 *
+            TLV::EstimateStructOverhead(
+                   TLV::EstimateStructOverhead(sizeof(uint8_t), sizeof(EndpointId), sizeof(ClusterId), sizeof(AttributeId)) *
                    CHIP_IM_SERVER_MAX_NUM_PATH_GROUPS_FOR_SUBSCRIPTIONS);
     }
 
@@ -87,6 +97,13 @@ protected:
         // All the fields added together
         return TLV::EstimateStructOverhead(MaxScopedNodeIdSize(), sizeof(SubscriptionId), sizeof(uint16_t), sizeof(uint16_t),
                                            sizeof(bool), MaxSubscriptionPathsSize());
+    }
+
+    static constexpr size_t MaxSubscriptionsSize()
+    {
+        // All the fields added together
+        return TLV::EstimateStructOverhead(MaxScopedNodeIdSize(), sizeof(SubscriptionId), sizeof(uint16_t), sizeof(uint16_t),
+                                           sizeof(bool), MaxSubscriptionsPathsSize());
     }
 
     enum class EventPathType : uint8_t
